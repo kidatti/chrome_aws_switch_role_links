@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #202124;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #4285F4;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #4285F4;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 400px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-family: 'Roboto Mono', monospace;
+            background-color: #ffffff;
+            color: #202124;
+            resize: vertical;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4285F4;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4285F4;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        button:hover {
+            background-color: #2b6cb0;
+        }
+
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* プロファイル色設定のスタイル */
+        .profile-colors {
+            margin-top: 2rem;
+        }
+
+        .profile-list {
+            margin-top: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 1rem;
+            background-color: #ffffff;
+        }
+
+        .profile-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #dadce0;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+        }
+
+        .profile-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .profile-name {
+            font-weight: 500;
+            flex-grow: 1;
+            font-size: 1.1rem;
+        }
+
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .color-option {
+            position: relative;
+        }
+
+        .color-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .color-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-option input[type="radio"]:checked + label {
+            border-color: #000;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-option input[type="radio"]:checked + label::after {
+            content: "✓";
+            color: #000;
+            font-weight: bold;
+            font-size: 18px;
+            text-shadow: 0 0 2px #fff;
+        }
+
+        .color-option label:hover {
+            transform: scale(1.1);
+        }
+
+        .no-profiles {
+            text-align: center;
+            padding: 2rem;
+            color: #202124;
+            font-size: 1.1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #202124;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 650px) {
+            .container {
+                padding: 1.5rem;
+                margin: 1rem auto;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            textarea {
+                font-size: 1rem;
+            }
+            
+            .profile-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .color-picker-container {
+                margin-top: 0.8rem;
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>.aws/config</h1>
+    <textarea id="aws-config"></textarea>
+    <button id="save-button">Save</button>
+    
+    <h2>プロファイル色設定</h2>
+    <div class="profile-colors">
+        <div id="profile-list" class="profile-list">
+            <div class="loading">プロファイルを読み込み中...</div>
+        </div>
+        <button id="save-colors-button">色設定を保存</button>
+    </div>
+</div>
+<script src="options.js"></script>
+</body>
+</html>

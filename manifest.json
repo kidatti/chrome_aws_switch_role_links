@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "AWS Switch Role Links",
+  "version": "0.4",
+  "description": "Easily manage and switch between AWS roles directly from your browser.",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/128x128.png",
+      "48": "images/128x128.png",
+      "128": "images/128x128.png"
+    }
+  },
+  "icons": {
+    "16": "images/128x128.png",
+    "48": "images/128x128.png",
+    "128": "images/128x128.png"
+  },
+  "options_page": "options.html",
+  "author": "AWS Switch Role Links"
+}
